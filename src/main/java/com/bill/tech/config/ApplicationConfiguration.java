@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.bill.tech.service.impl.CustomUserDetailService;
+
 @Configuration
 public class ApplicationConfiguration {
 	@Bean
@@ -21,10 +22,12 @@ public class ApplicationConfiguration {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
 		return builder.getAuthenticationManager();
 	}
+
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
+
 	@Autowired
 	CustomUserDetailService customUserDetailService;
 

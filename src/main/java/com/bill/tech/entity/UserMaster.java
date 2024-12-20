@@ -1,19 +1,22 @@
 package com.bill.tech.entity;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.bill.tech.util.ListToStringConverter;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +29,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class UserMaster implements UserDetails {
+public class UserMaster extends Auditable implements UserDetails {
 	/**
 	 * 
 	 */
@@ -40,12 +43,15 @@ public class UserMaster implements UserDetails {
 	private String middleName;
 	@Column(name = "last_name", nullable = false, length = 100)
 	private String lastName;
-	@Column(name = "contact_number", nullable = false,unique = true, length = 10)
+	@Column(name = "contact_number", nullable = false, unique = true, length = 10)
 	private String contactNumber;
-	@Column(name = "email_id", nullable = false, length = 100,unique = true)
+	@Column(name = "email_id", nullable = false, length = 100, unique = true)
 	private String emailId;
 	@Column(name = "password", nullable = false, length = 100)
 	private String password;
+	@Column(name = "old_password", columnDefinition = "TEXT")
+	@Convert(converter = ListToStringConverter.class)
+	private List<String> oldPassword;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -58,7 +64,7 @@ public class UserMaster implements UserDetails {
 	}
 
 	@PrePersist
-	@PreUpdate
+	// @PreUpdate
 	public void encryptPassword() {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		this.password = passwordEncoder.encode(this.password);

@@ -19,7 +19,7 @@ public class EntryPoint implements AuthenticationEntryPoint {
 			AuthenticationException authException) throws IOException, ServletException {
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		PrintWriter writer = response.getWriter();
-		writer.println("Oops!! Access Denied" + authException.getMessage()+authException.getLocalizedMessage()+"");
+		writer.println("Oops!! Access Denied" + authException.getMessage() + authException.getLocalizedMessage() + "");
 	}
 
 }

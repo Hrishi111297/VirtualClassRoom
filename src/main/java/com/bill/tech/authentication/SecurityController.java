@@ -51,22 +51,21 @@ public class SecurityController {
 			throws InterruptedException {
 		this.doAuthenticate(request.getUsername(), request.getPassword());
 		System.out.println(request.getUsername() + "&" + request.getPassword());
-		//Thread.sleep(5000);
+		// Thread.sleep(5000);
 
 		UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
 		String token = this.helper.generateToken(userDetails);
 
-		//Cookie cookie = new Cookie("jwtToken", token);
-	//	cookie.setHttpOnly(true); // Ensures the cookie is only accessible via HTTP (not accessible via
-									// JavaScript)
-		//cookie.setPath("/"); // Set the cookie path to root ("/") so it's accessible from all paths
-	//	response.addCookie(cookie);
-        JwtResponse jwtResponse = JwtResponse.builder()
-                .token(token)
-                .username(userDetails.getUsername())
-                .userMasterDataRequestDto(modelMapper.map(userDetails, UserMasterDataRequestDto.class))
-                .build();
-		//JwtResponse jwtResponse = JwtResponse.builder().token(token).build();
+		// Cookie cookie = new Cookie("jwtToken", token);
+		// cookie.setHttpOnly(true); // Ensures the cookie is only accessible via HTTP
+		// (not accessible via
+		// JavaScript)
+		// cookie.setPath("/"); // Set the cookie path to root ("/") so it's accessible
+		// from all paths
+		// response.addCookie(cookie);
+		JwtResponse jwtResponse = JwtResponse.builder().token(token).username(userDetails.getUsername())
+				.userMasterDataRequestDto(modelMapper.map(userDetails, UserMasterDataRequestDto.class)).build();
+		// JwtResponse jwtResponse = JwtResponse.builder().token(token).build();
 
 		return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
 	}
@@ -91,10 +90,9 @@ public class SecurityController {
 
 	}
 
-	
-@PostMapping("/register")
-public ResponseEntity<UserMasterDataRequestDto> addUser(@Valid @RequestBody UserMasterDataRequestDto e){	
-	return new ResponseEntity<>(this.userMasterService.addUser(e),HttpStatus.CREATED);
-}
+	@PostMapping("/register")
+	public ResponseEntity<UserMasterDataRequestDto> addUser(@Valid @RequestBody UserMasterDataRequestDto e) {
+		return new ResponseEntity<>(this.userMasterService.addUser(e), HttpStatus.CREATED);
+	}
 
 }

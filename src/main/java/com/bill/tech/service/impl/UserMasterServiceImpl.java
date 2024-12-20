@@ -45,7 +45,8 @@ public class UserMasterServiceImpl implements UserMasterService {
 
 	@Override
 	public List<UserMasterDataRequestDto> getAllUsers() {
-		return this.userMasterRepo.findAll().stream().map(emp->this.modelMapper.map(emp,UserMasterDataRequestDto.class)).collect(Collectors.toList());
+		return this.userMasterRepo.findAll().stream()
+				.map(emp -> this.modelMapper.map(emp, UserMasterDataRequestDto.class)).collect(Collectors.toList());
 	}
 
 }

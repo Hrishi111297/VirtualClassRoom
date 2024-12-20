@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
 public class SecurityConfigurations {
-	public static final String[] URL_CONST_FOR_ADMIN_AND_CUSTOMER = { "/api/**"};
+	public static final String[] URL_CONST_FOR_ADMIN_AND_CUSTOMER = { "/api/**" };
 
 	public static final String[] OPEN_REQUEST = { "/auth/**" };
 	@Autowired
@@ -33,9 +33,9 @@ public class SecurityConfigurations {
 
 		http.csrf(csrf -> csrf.disable()).cors(cors -> cors.configurationSource(getCorsConfigurationSource()))
 				.authorizeHttpRequests(auth -> auth.requestMatchers(OPEN_REQUEST).permitAll()
-					.requestMatchers(URL_CONST_FOR_ADMIN_AND_CUSTOMER)
-					//.hasAnyRole("CUSTOMER", "ADMIN")
-				//	.requestMatchers("/api/**")
+						.requestMatchers(URL_CONST_FOR_ADMIN_AND_CUSTOMER)
+						// .hasAnyRole("CUSTOMER", "ADMIN")
+						// .requestMatchers("/api/**")
 						.authenticated().anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -47,7 +47,6 @@ public class SecurityConfigurations {
 	public CorsConfigurationSource getCorsConfigurationSource() {
 		return new CorsConfigurationSource() {
 
-			
 			@Override
 			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
 				CorsConfiguration config = new CorsConfiguration();
@@ -58,7 +57,7 @@ public class SecurityConfigurations {
 				config.setExposedHeaders(Arrays.asList("Authorization"));
 				config.setMaxAge(3600L);
 				return config;
-				
+
 			}
 		};
 	}

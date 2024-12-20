@@ -17,8 +17,9 @@ import com.bill.tech.service.UserMasterService;
 public class UserMasterController {
 	@Autowired
 	UserMasterService userMasterService;
-@GetMapping("/getAll")
-public ResponseEntity<List<UserMasterDataRequestDto>> getAllUsers(){	
-	return new ResponseEntity<List<UserMasterDataRequestDto>>(this.userMasterService.getAllUsers(),HttpStatus.OK);
-}
+
+	@GetMapping("/getAll")
+	public ResponseEntity<List<UserMasterDataRequestDto>> getAllUsers() {
+		return new ResponseEntity<List<UserMasterDataRequestDto>>(this.userMasterService.getAllUsers(), HttpStatus.OK);
+	}
 }
