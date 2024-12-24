@@ -22,7 +22,14 @@ import jakarta.servlet.http.HttpServletRequest;
 public class SecurityConfigurations {
 	public static final String[] URL_CONST_FOR_ADMIN_AND_CUSTOMER = { "/api/**" };
 
-	public static final String[] OPEN_REQUEST = { "/auth/**" };
+	public static final String[] OPEN_REQUEST = { 
+		    "/auth/**",
+		    "/swagger-resources/**",
+		    "/swagger-ui/**",
+		    "/v2/api-docs/**", 
+		    "/v3/api-docs/**", 
+		    "/webjars/**" 
+		};
 	@Autowired
 	private EntryPoint point;
 	@Autowired
