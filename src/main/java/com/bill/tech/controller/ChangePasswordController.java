@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bill.tech.payload.request.PasswordHistoryDTO;
 import com.bill.tech.service.ChangePasswordService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "ChangePasswordController", description = "This Section Gives Us The API Endpoint Related To The ChangePasswordController")
 public class ChangePasswordController {
 	@Autowired
 	private ChangePasswordService changePasswordService;

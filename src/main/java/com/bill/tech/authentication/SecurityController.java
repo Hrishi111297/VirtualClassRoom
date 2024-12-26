@@ -21,11 +21,16 @@ import com.bill.tech.payload.request.UserMasterDataRequestDto;
 import com.bill.tech.repository.UserMasterRepo;
 import com.bill.tech.service.UserMasterService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "SecurityController", description = "This Section Gives Us The API Endpoint Related To The SecurityController")
 public class SecurityController {
 
 	@Autowired
@@ -47,6 +52,12 @@ public class SecurityController {
 	private Logger logger = LoggerFactory.getLogger(SecurityController.class);
 
 	@PostMapping("/login")
+	@Operation(summary = "login", description = "login desc")
+@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "ok"),
+		@ApiResponse(responseCode = "401", description = "no authorize"),
+		@ApiResponse(responseCode = "201", description = "new user")
+})
 	public ResponseEntity<JwtResponse> login(@Valid @RequestBody JwtRequest request, HttpServletResponse response)
 			throws InterruptedException {
 		this.doAuthenticate(request.getUsername(), request.getPassword());

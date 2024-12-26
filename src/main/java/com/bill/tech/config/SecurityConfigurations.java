@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.bill.tech.authentication.EntryPoint;
 import com.bill.tech.authentication.JwtFiltetr;
@@ -19,17 +20,12 @@ import com.bill.tech.authentication.JwtFiltetr;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
+@EnableWebMvc
 public class SecurityConfigurations {
 	public static final String[] URL_CONST_FOR_ADMIN_AND_CUSTOMER = { "/api/**" };
 
-	public static final String[] OPEN_REQUEST = { 
-		    "/auth/**",
-		    "/swagger-resources/**",
-		    "/swagger-ui/**",
-		    "/v2/api-docs/**", 
-		    "/v3/api-docs/**", 
-		    "/webjars/**" 
-		};
+	public static final String[] OPEN_REQUEST = {"/auth/status**", "/v3/api-docs/**", "/v2/api-docs/**",
+		"/swagger-resources/**", "/swagger-ui/**", "/webjars/**" };
 	@Autowired
 	private EntryPoint point;
 	@Autowired

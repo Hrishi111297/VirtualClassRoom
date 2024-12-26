@@ -1,62 +1,26 @@
 package com.bill.tech.config;
 
-
-
-import java.util.Arrays;
-
-import java.util.Collections;
-import java.util.List;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.AuthorizationScope;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.SecurityReference;
-import springfox.documentation.service.SecurityScheme;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spi.service.contexts.SecurityContext;
-import springfox.documentation.spring.web.plugins.Docket;
-
-@Configuration
+@Configuration // Add this annotation
 public class SwaggerConfiguration {
 
-	private static final String AUTHORIZATION_HEADER = "Authorization";
-	 private static final String CSRF_HEADER = "X-CSRF-TOKEN";
-
-	private ApiKey apiKeys() {
-		return new ApiKey("JWT", AUTHORIZATION_HEADER, "header");
-	}
-
-	private List<SecurityContext> securityContexts() {
-		return Arrays.asList(SecurityContext.builder().securityReferences(securityReferences()).build());
-	}
-
-	private List<SecurityReference> securityReferences() {
-		AuthorizationScope scope = new AuthorizationScope("global", "accessEverything");
-		return Arrays.asList(new SecurityReference("JWT", new AuthorizationScope[] { scope }),new SecurityReference("CSRF-TOKEN", new AuthorizationScope[] { scope }));
-	}
-
-
-    private SecurityScheme csrfTokenKey() {
-        return new springfox.documentation.service.ApiKey("CSRF-TOKEN", CSRF_HEADER, "header");
+    @Bean
+    public OpenAPI springShopOpenAPI() {
+        return new OpenAPI()
+                .info(new Info().title("Virtual class Room API")
+                .description("Virtual class Room application")
+                .version("v0.0.1")
+                .contact(new Contact().name("Hrishikesh").email("hrishi111297@gmail.com").url("my url"))
+                .license(new License().name("Apache 2.0").url("http://springdoc.org")))
+                .externalDocs(new ExternalDocumentation()
+                .description("SpringShop Wiki Documentation")
+                .url("https://springshop.wiki.github.org/docs"));
     }
-	@Bean
-	Docket api() {
-
-		return new Docket(DocumentationType.SWAGGER_2).apiInfo(getApiInfo()).securityContexts(securityContexts())
-				.securitySchemes(Arrays.asList(apiKeys(),csrfTokenKey())).select().apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.any()).build();
-	}
-
-	private ApiInfo getApiInfo() {
-		return new ApiInfo("Virtual class room Application Application :REST API", "This project is developed by RNT", "1.0", "Terms And Service",
-				new Contact("Hrishikesh", "www.rnt.ai", "hrishi111297@gmail.com"), "Licennse of APi", "API lincense URL",
-				Collections.emptyList());
-	}
-
 }
