@@ -106,18 +106,23 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+		<!-- For Swagger Api-->
 <dependency>
 <groupId>org.springdoc</groupId>
 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 <version>2.5.0</version>
 </dependency>
-
+<!-- for Eamil-->
 <dependency>
     <groupId>com.sun.mail</groupId>
     <artifactId>jakarta.mail</artifactId>
     <version>2.0.1</version>
 </dependency>
-
+<!-- For Web Socket-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-websocket</artifactId>
+</dependency>
 
 	</dependencies>
 
