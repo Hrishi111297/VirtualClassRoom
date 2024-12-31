@@ -11,8 +11,11 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class PdfDocument {
-    @Id
+public class PdfDocument extends Auditable{
+   
+	private static final long serialVersionUID = -8116138951168025762L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

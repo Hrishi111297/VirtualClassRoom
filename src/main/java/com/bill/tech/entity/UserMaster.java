@@ -25,7 +25,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -69,8 +68,7 @@ public class UserMaster extends Auditable implements UserDetails {
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-	List<SimpleGrantedAuthority>authorities	=this.roles.stream().map((role)->new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-		
+	List<SimpleGrantedAuthority>authorities	=this.roles.stream().map((role)->new SimpleGrantedAuthority("ROLE_"+role.getName())).collect(Collectors.toList());
 		return authorities;
 	}
 

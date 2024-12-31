@@ -22,7 +22,8 @@ import jakarta.servlet.http.HttpServletRequest;
 @Configuration
 @EnableWebMvc
 public class SecurityConfigurations {
-	public static final String[] URL_CONST_FOR_ADMIN_AND_CUSTOMER = { "/api/**" };
+	public static final String[] URL_CONST_FOR_ADMIN = { "/api/admin**" };
+	public static final String[] URL_CONST_FOR_STUDENT = { "/api/student/**" };
 
 	public static final String[] OPEN_REQUEST = {"/auth/**", "/v3/api-docs/**", "/v2/api-docs/**",
 		"/swagger-resources/**", "/swagger-ui/**", "/webjars/**","/ws/**","/notifications/**"};
@@ -36,9 +37,10 @@ public class SecurityConfigurations {
 
 		http.csrf(csrf -> csrf.disable()).cors(cors -> cors.configurationSource(getCorsConfigurationSource()))
 				.authorizeHttpRequests(auth -> auth.requestMatchers(OPEN_REQUEST).permitAll()
-						.requestMatchers(URL_CONST_FOR_ADMIN_AND_CUSTOMER)
-						// .hasAnyRole("CUSTOMER", "ADMIN")
-						// .requestMatchers("/api/**")
+						.requestMatchers(URL_CONST_FOR_ADMIN)
+						 .hasRole("ADMIN")
+						 .requestMatchers(URL_CONST_FOR_STUDENT) .hasRole("STUDENT")
+						 .requestMatchers("/api/s1/**") 
 						.authenticated().anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

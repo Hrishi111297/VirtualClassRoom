@@ -13,7 +13,7 @@ import com.bill.tech.payload.request.UserMasterDataRequestDto;
 import com.bill.tech.service.UserMasterService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("api")
 public class UserMasterController {
 	@Autowired
 	UserMasterService userMasterService;

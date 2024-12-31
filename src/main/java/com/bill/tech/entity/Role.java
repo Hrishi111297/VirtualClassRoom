@@ -11,7 +11,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Role {
+public class Role extends Auditable {
+
+	private static final long serialVersionUID = 3390658154987814524L;
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name="id")

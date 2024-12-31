@@ -22,7 +22,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-
 @Table(name = "otp")
 @Where(clause = "deleted_by is null")
 public class OTP extends Auditable {
